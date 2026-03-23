@@ -84,7 +84,7 @@ class WarnSystem(commands.Cog):
         embed = discord.Embed(
             title=f"⚠️ Warnings de {usuario}",
             description=texto,
-            color=discord.Color.orange()
+            color=discord.Color.blue()
         )
 
         await interaction.response.send_message(embed=embed)
