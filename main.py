@@ -7,10 +7,9 @@ import asyncio
 # TOKEN DESDE VARIABLE DE ENTORNO
 # ============================
 
-TOKEN = os.getenv("TOKEN")  # ← En tu hosting defines la variable TOKEN
+TOKEN = os.getenv("TOKEN")
 
-if TOKEN is None:
-    raise ValueError("❌ No se encontró la variable de entorno 'TOKEN'.")
+
 
 # ============================
 # INTENTS
