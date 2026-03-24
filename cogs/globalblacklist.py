@@ -11,7 +11,7 @@ from typing import Dict, Any, List, Optional
 BLACKLIST_FILE = "global_blacklist.json"
 STAFF_FILE = "blacklist_staff.json"
 
-# Servidor donde NO se aplicará el ban global
+
 EXCLUDED_GUILDS = [
     1485789239647146115  # Servidor de soporte
 ]
@@ -199,19 +199,71 @@ class GlobalBlacklistCog(commands.Cog):
                 pass
 
         # DM
-        if user:
-            try:
-                embed = discord.Embed(
-                    title="🚫 Has sido añadido a una blacklist global",
-                    description=f"**Razón:** {reason}",
-                    color=discord.Color.red()
-                )
-                if proofs:
-                    embed.add_field(name="Pruebas", value="\n".join(proofs), inline=False)
-                await user.send(embed=embed)
-            except:
-                pass
+if user:
+    try:
+        embed = discord.Embed(
+            title="🚫 Has sido añadido a una Blacklist Global",
+            color=discord.Color.red()
+        )
 
+        embed.add_field(
+            name="📌 ¿Qué significa esto?",
+            value=(
+                "Has sido registrado en un sistema de seguridad global utilizado por múltiples servidores. "
+                "Este sistema se emplea para identificar y marcar usuarios relacionados con actividades "
+                "potencialmente dañinas, como raids, abusos de permisos o comportamientos sospechosos."
+            ),
+            inline=False
+        )
+
+        embed.add_field(
+            name="📝 Razón del registro",
+            value=f"{reason}",
+            inline=False
+        )
+
+        if proofs:
+            embed.add_field(
+                name="📁 Pruebas adjuntas",
+                value="\n".join(proofs),
+                inline=False
+            )
+
+        embed.add_field(
+            name="📅 Fecha del registro",
+            value=f"<t:{int(time.time())}:F>",
+            inline=False
+        )
+
+        embed.add_field(
+            name="⚠️ Consecuencias",
+            value=(
+                "Este sistema usa un auto ban automático para prevenir otros raideos y mantener comunidades seguras "
+                "**Seras automáticamentebaneado de todos los servidores en los que el bot esté**"
+                "Esto no significa que estes baneado de por vida, tienes una opcion para apelar \n\n"
+                "Dependiendo de tus actos sera apelable o no."
+            ),
+            inline=False
+        )
+
+        embed.add_field(
+            name="🔍 ¿Qué puedes hacer?",
+            value=(
+                "Si consideras que este registro es un error o deseas apelar tu caso, puedes ponerte"
+                "en contacto con el equipo de soporte. Allí podrás explicar tu situación y solicitar"
+                "una revisión manual de tu caso.\n\n"
+                "**Servidor de soporte:**\n"
+                "[Haz clic aquí para unirte](https://discord.gg/nSwqZyphhN)"
+            ),
+            inline=False
+        )
+
+        embed.set_footer(text="Sistema de Seguridad Global")
+
+        await user.send(embed=embed)
+
+    except:
+        pass
     # ============================================================
     # /blacklist perms
     # ============================================================
